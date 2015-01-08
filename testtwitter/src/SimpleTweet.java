@@ -10,7 +10,7 @@ public class SimpleTweet {
 
 	public static void main(String[] args) {
 
-		System.out.println("What's happening?");
+		System.out.println("What's happening???");
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
