@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Random;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -22,12 +23,37 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 
-public class speechsynthesizer extends Thread {
-	  public static void main(String[] args)
-	  {
-	  speechsynthesizer t = new speechsynthesizer(speechsynthesizer.class.getResource("mysound.mp3").toString());
-	  //t.start();
-	  }
+public class speechsynthesizer  {
+	public static void main(String[] args) {
+
+		String comment = speechsynthesizer.getSpeechComment(40);
+		speechsynthesizer.getandsavefile(comment);
+		speechsynthesizer.speak("mysound.mp3");
+	}
+public static String getSpeechComment(int waterLevel){
+
+		// 水分レベルに応じたコメントを返す
+		String [][] demandWaterCommentDB = {{"もういらんて、水","お腹たっぷたぷですわ"},{"腹八分目ー","おなか一杯だよ、おれ"},{"水を与えたまえ","われ、水欲す"},{"水をください","おなかすいたよ"},{"水をくださいませんか","そろそろたのんますよ"},{"ちょっ、まじ水くれ","あっ、死ぬかもしんない"}};
+
+		Random rnd = new Random();
+        int random_commnet = rnd.nextInt(2);
+
+		if(waterLevel >= 90){
+			return demandWaterCommentDB[0][random_commnet];
+		}else if((waterLevel >= 70) && (waterLevel < 90)){
+			return demandWaterCommentDB[1][random_commnet];
+		}else if((waterLevel >= 30) && (waterLevel < 70)){
+			return demandWaterCommentDB[2][random_commnet];
+		}else if((waterLevel >= 10) && (waterLevel < 30)){
+			return demandWaterCommentDB[3][random_commnet];
+		}else if((waterLevel >= 1) && (waterLevel < 10)){
+			return demandWaterCommentDB[4][random_commnet];
+		}else{
+			return demandWaterCommentDB[5][random_commnet];
+		}
+
+
+}
 
 public static String getandsavefile(String cmt){
 
@@ -61,7 +87,7 @@ return filename;
 	    }
 		finally{
 
-			return "";
+			return null;
 		}
 	  }
 public static void speak(String mp3path){
@@ -121,24 +147,6 @@ static SourceDataLine getLine(AudioFormat audioFormat) throws LineUnavailableExc
   res = (SourceDataLine) AudioSystem.getLine(info);
   res.open(audioFormat);
   return res;
-}
-
-
-
-
-
-
-
-
-private URL url;
-
-
-public speechsynthesizer(String mp3)
-{
-try{
-   this.url = new URL(mp3);
-   }catch(java.net.MalformedURLException e)
-      {System.out.println(e.getMessage());}
 }
 
 
