@@ -24,7 +24,7 @@ public class SimpleTweet {
 
 	private static int get_waterLevel() {
 		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+		return 90;
 	}
 
 	private static String getComment(int waterLevel) {
