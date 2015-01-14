@@ -22,6 +22,7 @@ public class SimpleTweet {
 
 		} catch (TwitterException e) {
 		}
+
 	}
 
 	private static int get_waterLevel() {
