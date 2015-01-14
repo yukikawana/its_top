@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -23,26 +25,35 @@ public class SimpleTweet {
 	}
 
 	private static int get_waterLevel() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 90;
+		// 水分レベル取得
+
+		//Randomクラスのインスタンス化(水分レベルの仮の値)
+        Random rnd = new Random();
+        int ran = rnd.nextInt(101);
+        System.out.println(ran);
+
+		return ran;
 	}
 
 	private static String getComment(int waterLevel) {
 		// 水分レベルに応じたコメントを返す
-		String [] commentDB = new String [] {"もういらんて、水","腹八分目～","水を与えたまえ","水をください","水をくださいませんか","ちょっ、まじ水くれ"};
+		String [][] demandWaterCommentDB = {{"もういらんて、水","お腹たっぷたぷですわｗｗｗ"},{"腹八分目～","おなか一杯だよ、おれ"},{"水を与えたまえ","われ、水欲す"},{"水をください","おなかすいたよ"},{"水をくださいませんか","そろそろたのんますよ"},{"ちょっ、まじ水くれ","あっ、死ぬかもしんない"}};
+
+		Random rnd = new Random();
+        int random_commnet = rnd.nextInt(2);
 
 		if(waterLevel >= 90){
-			return commentDB[0];
+			return demandWaterCommentDB[0][random_commnet];
 		}else if((waterLevel >= 70) && (waterLevel < 90)){
-			return commentDB[1];
+			return demandWaterCommentDB[1][random_commnet];
 		}else if((waterLevel >= 30) && (waterLevel < 70)){
-			return commentDB[2];
+			return demandWaterCommentDB[2][random_commnet];
 		}else if((waterLevel >= 10) && (waterLevel < 30)){
-			return commentDB[3];
+			return demandWaterCommentDB[3][random_commnet];
 		}else if((waterLevel >= 1) && (waterLevel < 10)){
-			return commentDB[4];
+			return demandWaterCommentDB[4][random_commnet];
 		}else{
-			return commentDB[5];
+			return demandWaterCommentDB[5][random_commnet];
 		}
 	}
 }
