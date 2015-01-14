@@ -11,8 +11,8 @@ public class SimpleTweet {
 		//System.out.println("What's happening???");
 
 		try {
-			//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			//String tweetString = br.readLine();
+			// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			// String tweetString = br.readLine();
 			String tweetString = comment;
 
 			Twitter twitter = new TwitterFactory().getInstance();
