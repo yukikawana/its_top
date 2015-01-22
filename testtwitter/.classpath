@@ -10,6 +10,7 @@
 	<classpathentry kind="lib" path="lib/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/mp3spi1.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/tritonus_share.jar"/>
-	<classpathentry kind="lib" path="C:/pleiades-e4.4-java-jre_20140926/pleiades/workspace/its_top/testtwitter/lib/basicplayer3.0.jar"/>
+	<classpathentry kind="lib" path="lib/basicplayer3.0.jar"/>
+	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
