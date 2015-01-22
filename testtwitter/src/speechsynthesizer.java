@@ -25,11 +25,18 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class speechsynthesizer  {
 	public static void main(String[] args) {
-
-		String comment = speechsynthesizer.getSpeechComment(90);
+		int waterlevel = SerialTest.Getmoisture();
+		String comment = speechsynthesizer.getSpeechComment(waterlevel);
 		speechsynthesizer.getandsavefile(comment);
 		speechsynthesizer.speak("mysound.mp3");
 	}
+public static void begwater(){
+	int waterlevel = SerialTest.Getmoisture();
+	String comment = speechsynthesizer.getSpeechComment(waterlevel);
+	speechsynthesizer.getandsavefile(comment);
+	speechsynthesizer.speak("mysound.mp3");
+
+}
 public static String getSpeechComment(int waterLevel){
 
 		// 水分レベルに応じたコメントを返す

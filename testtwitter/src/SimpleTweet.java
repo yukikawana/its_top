@@ -16,11 +16,20 @@ public class SimpleTweet {
 		System.out.println("Tweet Program Start!");
 
 	}
+	public static void startTweet() {
+		TimerStar task = new TimerStar();//タイマータスククラスのインスタンス
+		java.util.Timer timer = new java.util.Timer(); //タイマークラスのインスタンス
+		timer.schedule(task, 60000,180000);//タイマーのスケジューリング
+		System.out.println("Tweet Program Start!");
+
+
+	}
 }
+
 
 class TimerStar extends TimerTask {
 	public void run(){
-		int waterLevel = get_waterLevel();
+		int waterLevel = SerialTest.Getmoisture();
 
 		String comment = getComment(waterLevel);
 		//System.out.println("What's happening???");
