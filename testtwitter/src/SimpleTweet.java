@@ -57,15 +57,15 @@ class TimerStar extends TimerTask {
 		Random rnd = new Random();
         int random_commnet = rnd.nextInt(3);
 
-		if(waterLevel >= 90){
+		if(waterLevel >= 85){
 			return demandWaterCommentDB[0][random_commnet];
-		}else if((waterLevel >= 70) && (waterLevel < 90)){
+		}else if((waterLevel >= 75) && (waterLevel < 85)){
 			return demandWaterCommentDB[1][random_commnet];
-		}else if((waterLevel >= 30) && (waterLevel < 70)){
+		}else if((waterLevel >= 50) && (waterLevel < 75)){
 			return demandWaterCommentDB[2][random_commnet];
-		}else if((waterLevel >= 10) && (waterLevel < 30)){
+		}else if((waterLevel >= 35) && (waterLevel < 50)){
 			return demandWaterCommentDB[3][random_commnet];
-		}else if((waterLevel >= 1) && (waterLevel < 10)){
+		}else if((waterLevel >= 15) && (waterLevel < 35)){
 			return demandWaterCommentDB[4][random_commnet];
 		}else{
 			return demandWaterCommentDB[5][random_commnet];
