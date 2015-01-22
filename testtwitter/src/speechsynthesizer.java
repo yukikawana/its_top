@@ -26,14 +26,14 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class speechsynthesizer  {
 	public static void main(String[] args) {
 
-		String comment = speechsynthesizer.getSpeechComment(40);
+		String comment = speechsynthesizer.getSpeechComment(90);
 		speechsynthesizer.getandsavefile(comment);
 		speechsynthesizer.speak("mysound.mp3");
 	}
 public static String getSpeechComment(int waterLevel){
 
 		// 水分レベルに応じたコメントを返す
-		String [][] demandWaterCommentDB = {{"もういらんて、水","お腹たっぷたぷですわ"},{"腹八分目ー","おなか一杯だよ、おれ"},{"水を与えたまえ","われ、水欲す"},{"水をください","おなかすいたよ"},{"水をくださいませんか","そろそろたのんますよ"},{"ちょっ、まじ水くれ","あっ、死ぬかもしんない"}};
+		String [][] demandWaterCommentDB = {{"もういらんて、水","お腹たっぷたぷですわー"},{"腹八分目ー","おなか一杯だよ、おれ"},{"水を与えたまえ","われ、水欲す"},{"水をください","おなかすいたよ"},{"水をくださいませんか","そろそろたのんますよ"},{"ちょっ、まじ水くれ","あっ、死ぬかもしんない"}};
 
 		Random rnd = new Random();
         int random_commnet = rnd.nextInt(2);
@@ -92,10 +92,38 @@ return filename;
 	  }
 public static void speak(String mp3path){
 
-	Runtime r = Runtime.getRuntime();
-	try {
-	//	Process process = r.exec("C:\\pleiades-e4.4-java-jre_20140926\\pleiades\\workspace\\its_top\\testtwitter\\ss.bat");
-		   File file = new File(mp3path);
+/*
+	try{
+		File file = new File(mp3path);
+	    AudioInputStream in= AudioSystem.getAudioInputStream(file);
+	    AudioInputStream din = null;
+	    AudioFormat baseFormat = in.getFormat();
+	    AudioFormat decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+	                                                                                  baseFormat.getSampleRate(),
+	                                                                                  16,
+	                                                                                  baseFormat.getChannels(),
+	                                                                                  baseFormat.getChannels() * 2,
+	                                                                                  baseFormat.getSampleRate(),
+	                                                                                  false);
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(decodedFormat, in));
+			FloatControl gainControl =
+			    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(1.0f); // Reduce volume by 10 decibels.
+			clip.start();
+			SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    // A GUI element to prevent the Clip's daemon Thread
+                    // from terminating at the end of the main()
+                    JOptionPane.showMessageDialog(null, "Close to exit!");
+                }
+            });
+
+
+ */
+
+	try{
+		File file = new File(mp3path);
 		    AudioInputStream in= AudioSystem.getAudioInputStream(file);
 		    AudioInputStream din = null;
 		    AudioFormat baseFormat = in.getFormat();
@@ -110,10 +138,14 @@ public static void speak(String mp3path){
 		    // Play now.
 		    rawplay(decodedFormat, din);
 		    in.close();
-	} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+
+
+	}
+	catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
 		// TODO 自動生成された catch ブロック
 		e.printStackTrace();
 	}
+
 
 }
 
@@ -126,6 +158,7 @@ static void rawplay(AudioFormat targetFormat, AudioInputStream din) throws IOExc
   {
     // Start
     line.start();
+
     int nBytesRead = 0, nBytesWritten = 0;
     while (nBytesRead != -1)
     {
