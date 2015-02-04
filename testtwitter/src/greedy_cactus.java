@@ -11,16 +11,28 @@ public class greedy_cactus {
 			System.out.println("start tweeting");
 			SimpleTweet.startTweet();
 			System.out.println("now system is ready!");
-			while(true)
+			Thread greedycac = new Thread(){
+				public void run(){
+				while(true)
 			{
+					System.out.println("is anybody here?!");
+
 				if(SerialTest.Getdistance() < range)
 				{
+					System.out.println("somebody is here!");
 					speechsynthesizer.begwater();
-					Thread.sleep(10000);
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO 自動生成された catch ブロック
+						e.printStackTrace();
+					}
 				}
 
 			}
-
+			}
+		};
+		greedycac.start();
 
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック

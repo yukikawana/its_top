@@ -14,7 +14,7 @@ SerialPort serialPort;
     /** The port we're normally going to use. */
 private static final String PORT_NAMES[] = {                  "/dev/tty.usbserial-A9007UX1", // Mac OS X
         "/dev/ttyUSB0", // Linux
-        "COM4", // Windows
+        "COM3", // Windows
 };
 private BufferedReader input;
 private OutputStream output;
@@ -22,6 +22,7 @@ private static final int TIME_OUT = 2000;
 private static final int DATA_RATE = 9600;
 
 public void initialize() {
+
     CommPortIdentifier portId = null;
     Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -66,36 +67,39 @@ public synchronized void close() {
         serialPort.close();
     }
 }
-private static  String distance,moisture;
+public static  String temp_moisture = "0";
+public static int moisture,distance = 100;
 public synchronized void serialEvent(SerialPortEvent oEvent) {
     if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
         try {
             String inputLine=null;
-            
+
             if (input.ready()) {
                 inputLine = input.readLine();
                 String[] st2 = inputLine.split(",");
-                distance = st2[0];
-                moisture = st2[1];
+                if(st2.length < 2)return;
+                distance =  Integer.parseInt(st2[0]);
+                temp_moisture = st2[1];
                             System.out.println(distance);
-                            System.out.println(moisture);
+                            //System.out.println(temp_moisture);
             }
 
         } catch (Exception e) {
-            System.err.println(e.toString());
+            System.err.println("test serial "+e.toString());
         }
     }
     // Ignore all the other eventTypes, but you should consider the other ones.
 }
 
 public static int Getdistance(){
-	int gdistance = Integer.parseInt(distance);
-	return gdistance;
+	System.out.println(distance);
+	return distance;
 }
 
+
 public static int Getmoisture(){
-	int gmoisture = Integer.parseInt(moisture);
-	return gmoisture;
+
+	return moisture;
 }
 
 public static void StartArdCon() throws Exception {
@@ -109,11 +113,53 @@ public static void StartArdCon() throws Exception {
         }
     };
     t.start();
+    /*
+    Thread moisturethread = new Thread(){
+    	public void run(){
+    		int smoisture = Integer.parseInt(SerialTest.temp_moisture);
+///////
+///////
+    		int sum = 0;
+
+    		for (int i=0; i<=50; i++){
+    			if(i==0){
+    				sum = 0;
+    			}
+    		sum = sum + smoisture;
+    		System.out.println(sum);
+    		try{
+
+    			sleep(50);
+    			System.out.println("after sleep");
+    			}
+    		catch(InterruptedException ie)
+    		{
+
+    		}
+    		}
+
+
+    		System.out.println(distance);
+            System.out.println(temp_moisture);
+    		SerialTest.moisture = sum;
+    	}
+    };
+    moisturethread.start();
+
+    */
+    myThread my = new myThread();
+    my.start();
     System.out.println("Started");
 }
 public static void main(String args[]){
 	try {
 		StartArdCon();
+		//Thread.sleep(10000);
+		while(true){
+			System.out.println(Getdistance());
+	        System.out.println(Getmoisture());
+
+		}
 	} catch (Exception e) {
 		// TODO 自動生成された catch ブロック
 		e.printStackTrace();
@@ -121,5 +167,36 @@ public static void main(String args[]){
 
 
 }
+
+}
+class myThread extends Thread{
+	public void run(){
+		while(true){
+		int smoisture = Integer.parseInt(SerialTest.temp_moisture);
+///////
+///////
+		int sum = 0;
+
+		for (int i=0; i<=50; i++){
+			if(i==0){
+				sum = 0;
+			}
+		sum = sum + smoisture;
+		try{
+
+			sleep(50);
+			}
+		catch(InterruptedException ie)
+		{
+
+		}
+		}
+
+
+
+		SerialTest.moisture = sum/50;
+	}
+	}
+
 
 }
