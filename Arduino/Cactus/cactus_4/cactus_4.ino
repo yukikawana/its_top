@@ -31,34 +31,16 @@ void loop() {
   Value0 = analogRead(Pin0);
   Value1 = analogRead(Pin1);   
   int Mv = (Value1 - Value0);
-  int sum;
-  
-       if (Mv > 250){
-        Mv = 250;
-      }else if(Mv < 5){
-        Mv = 5;
-      } 
-     
-     for (int i=0; i <= 50; i++){
-     if (i == 0){
-       sum = 0;
-     }
-       sum = sum + Mv;
-      delay(500);
-     }
-     
-  float avr = (sum / 50);
-  float a = (avr - 5)/(250 - 5);
-  int cal = a * 100;
+
   
     
     // 距離センサ結果の出力（距離　100cm以内の物体のみを検出し、その距離をかえす）
   if (d<0 || 100<d){
-  printf("100,%d\n", cal);
+  printf("100,%d\n", Mv);
     delay(500);
    
-  } else {  
-  printf("%d,%d\n", d, cal);
+  } else { 
+  printf("%d,%d\n",d,Mv);
     delay(500);
   }
 }
