@@ -15,18 +15,28 @@ public class greedy_cactus {
 				public void run(){
 				while(true)
 			{
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO 自動生成された catch ブロック
+						e1.printStackTrace();
+					}
 					System.out.println("is anybody here?!");
+					int distance = SerialTest.Getdistance();
+					System.out.println(distance);
 
-				if(SerialTest.Getdistance() < range)
+				if(distance < range)
 				{
 					System.out.println("somebody is here!");
 					speechsynthesizer.begwater();
+
 					try {
-						Thread.sleep(10000);
+						Thread.sleep(5000);
 					} catch (InterruptedException e) {
 						// TODO 自動生成された catch ブロック
 						e.printStackTrace();
 					}
+
 				}
 
 			}

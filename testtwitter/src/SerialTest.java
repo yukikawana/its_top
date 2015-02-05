@@ -80,7 +80,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
                 if(st2.length < 2)return;
                 distance =  Integer.parseInt(st2[0]);
                 temp_moisture = st2[1];
-                            System.out.println(distance);
+                            //System.out.println(distance);
                             //System.out.println(temp_moisture);
             }
 
@@ -113,40 +113,7 @@ public static void StartArdCon() throws Exception {
         }
     };
     t.start();
-    /*
-    Thread moisturethread = new Thread(){
-    	public void run(){
-    		int smoisture = Integer.parseInt(SerialTest.temp_moisture);
-///////
-///////
-    		int sum = 0;
 
-    		for (int i=0; i<=50; i++){
-    			if(i==0){
-    				sum = 0;
-    			}
-    		sum = sum + smoisture;
-    		System.out.println(sum);
-    		try{
-
-    			sleep(50);
-    			System.out.println("after sleep");
-    			}
-    		catch(InterruptedException ie)
-    		{
-
-    		}
-    		}
-
-
-    		System.out.println(distance);
-            System.out.println(temp_moisture);
-    		SerialTest.moisture = sum;
-    	}
-    };
-    moisturethread.start();
-
-    */
     myThread my = new myThread();
     my.start();
     System.out.println("Started");
@@ -172,7 +139,6 @@ public static void main(String args[]){
 class myThread extends Thread{
 	public void run(){
 		while(true){
-		int smoisture = Integer.parseInt(SerialTest.temp_moisture);
 ///////
 ///////
 		int sum = 0;
@@ -181,10 +147,10 @@ class myThread extends Thread{
 			if(i==0){
 				sum = 0;
 			}
-		sum = sum + smoisture;
+		sum = sum + Integer.parseInt(SerialTest.temp_moisture);
 		try{
 
-			sleep(50);
+			sleep(150);
 			}
 		catch(InterruptedException ie)
 		{
